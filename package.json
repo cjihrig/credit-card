@@ -1,0 +1,27 @@
+{
+  "name": "credit-card",
+  "version": "1.0.0",
+  "description": "credit card validation",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cjihrig/credit-card"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "hoek": "2.3.0"
+  },
+  "devDependencies": {
+    "lab": "3.2.1"
+  },
+  "scripts": {
+    "test": "node node_modules/.bin/lab -t 100 -v"
+  },
+  "keywords": [
+    "credit card"
+  ],
+  "author": "Colin J. Ihrig <cjihrig@gmail.com> (http://www.cjihrig.com/)",
+  "license": "MIT"
+}
