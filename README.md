@@ -141,6 +141,23 @@ Executes the [Luhn algorithm](http://en.wikipedia.org/wiki/Luhn_algorithm) on a 
 
 Strips all non-numeric characters from `number`. If `number` is not a string, an empty string is returned.
 
+### `defaults([options [, overwrite]])`
+
+  - Arguments
+    - `options` (object) - New default values.
+    - `overwrite` (boolean) - If `true`, `options` completely overwrites the current defaults. Otherwise, `options` is merged into the current defaults.
+
+Sets module level default values. The existing defaults can be augmented or overwritten completely based on the value of `overwrite`. To restore the original default values, call `reset()`.
+
+### `reset()`
+
+  - Arguments
+    - None
+  - Returns
+    - object - The module's original default settings.
+
+Resets the module's default settings to their original values. This can be useful for undoing the effects of `defaults()`.
+
 ## Supported Credit Card Types
 
 This module supports a variety of credit cards. To better accommodate a wider range of clients, the card types have been aliased to other names as well.
