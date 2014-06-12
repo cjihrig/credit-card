@@ -52,6 +52,7 @@ The `validation` object returned by `validate()` will look like this:
         - `cardTypes` (object) - An object used to validate credit card types. This allows new types, such as custom gift cards, to be defined.
         - `expiryMonths` (object) - An object used to override default values related to expiry months.
         - `expiryYears` (object) - An object used to override default values related to expiry years.
+        - `schema` (object) - An object defining the names of the expected card property names. This is useful for supporting card data in a slightly different format. This can define `cardType`, `number`, `expiryMonth`, `expiryYear`, and `cvv` names.
   - Returns
     - object - An object containing the input card data and the results of validation. Should adhere to the following schema:
         - `card` (object) - This holds the value of the `card` argument.
@@ -146,6 +147,8 @@ Strips all non-numeric characters from `number`. If `number` is not a string, an
   - Arguments
     - `options` (object) - New default values.
     - `overwrite` (boolean) - If `true`, `options` completely overwrites the current defaults. Otherwise, `options` is merged into the current defaults.
+  - Returns
+    - object - The module's default settings following the update.
 
 Sets module level default values. The existing defaults can be augmented or overwritten completely based on the value of `overwrite`. To restore the original default values, call `reset()`.
 
@@ -174,6 +177,8 @@ This module supports a variety of credit cards. To better accommodate a wider ra
 The following example defines and validates a new card type known as `GIFT_CARD`. Notice that the `card` variable has its `cardType` set to `GIFT_CARD`, and a new `pin` field has been defined. The `options` variable is passed as the second argument to `validate()`. These options define the new `GIFT_CARD` type. The `cardPattern` is a regular expression that all gift card numbers should match. Similarly, `cvvPattern` is a regular expression that the CVV should match.
 
 Also notice the `customValidation` function. This function is used when normal validation is not quite enough. This function is passed the `card` object and `settings` object used by `validate()`. This function can return any data, which will be added directly to the response.
+
+This can be done globally, or on a per validation call basis. This example shows how it is done on a per call basis. To achieve the same thing globally, use the `defaults()` methods.
 
 ```javascript
 var CreditCard = require('credit-card');
@@ -218,4 +223,32 @@ The value of `validation` is shown below.
   isExpired: false,
   customValidation: true
 }
+```
+
+## Defining a Custom Card Schema
+
+By default, the `validate()` method expects the credit card object to contain the fields `cardType`, `number`, `expiryMonth`, `expiryYear`, and `cvv`. However, for convenience when working with other APIs, the module can be configured to use different field names. These overrides can be applied globally using `defaults()`, or on a per validation call using the `options` argument.
+
+The following example shows how `CreditCard` can be configured to work with the [PayPal schema](https://developer.paypal.com/docs/api/) by default. Notice that the fields in the `schema` passed to `defaults()` correspond to the fields in the `card` object.
+
+```javascript
+var card = {
+  type: 'visa',
+  number: '4111111111111111',
+  expire_month: '03',
+  expire_year: '2100',
+  cvv2: '123'
+};
+var validation;
+
+CreditCard.defaults({
+  schema: {
+    cardType: 'type',
+    number: 'number',
+    expiryMonth: 'expire_month',
+    expiryYear: 'expire_year',
+    cvv: 'cvv2'
+  }
+});
+validation = CreditCard.validate(card);
 ```

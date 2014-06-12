@@ -38,6 +38,35 @@ describe('CreditCard', function() {
       done();
     });
 
+    it('validates a card using a custom schema', function(done) {
+      var schema = {
+        cardType: 'type',
+        number: 'number',
+        expiryMonth: 'expire_month',
+        expiryYear: 'expire_year',
+        cvv: 'cvv2'
+      };
+      var card = {
+        type: 'visa',
+        number: '4111111111111111',
+        expire_month: '03',
+        expire_year: '2100',
+        cvv2: '123'
+      };
+      var validation = CreditCard.validate(card, {
+        schema: schema
+      });
+
+      expect(validation.card).to.deep.equal(card);
+      expect(validation.validCardNumber).to.equal(true);
+      expect(validation.validExpiryMonth).to.equal(true);
+      expect(validation.validExpiryYear).to.equal(true);
+      expect(validation.validCvv).to.equal(true);
+      expect(validation.isExpired).to.equal(false);
+      expect(validation.customValidation).to.not.exist;
+      done();
+    });
+
     it('no invalid responses on valid card by alias', function(done) {
       var card = {
         cardType: 'VC',
@@ -460,6 +489,38 @@ describe('CreditCard', function() {
       var updated = CreditCard.defaults({}, false);
 
       expect(original).to.deep.equal(updated);
+      done();
+    });
+
+    it('sets a custom schema', function(done) {
+      var schema = {
+        cardType: 'type',
+        number: 'number',
+        expiryMonth: 'expire_month',
+        expiryYear: 'expire_year',
+        cvv: 'cvv2'
+      };
+      var card = {
+        type: 'visa',
+        number: '4111111111111111',
+        expire_month: '03',
+        expire_year: '2100',
+        cvv2: '123'
+      };
+      var validation;
+
+      CreditCard.defaults({
+        schema: schema
+      });
+      validation = CreditCard.validate(card);
+
+      expect(validation.card).to.deep.equal(card);
+      expect(validation.validCardNumber).to.equal(true);
+      expect(validation.validExpiryMonth).to.equal(true);
+      expect(validation.validExpiryYear).to.equal(true);
+      expect(validation.validCvv).to.equal(true);
+      expect(validation.isExpired).to.equal(false);
+      expect(validation.customValidation).to.not.exist;
       done();
     });
   });
