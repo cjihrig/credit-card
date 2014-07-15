@@ -387,6 +387,21 @@ describe('CreditCard', function() {
       expect(CreditCard.isExpired(1, 2100)).to.equal(false);
       done();
     });
+
+    it('returns true when card expired last month', function(done) {
+      var date = new Date();
+
+      date.setMonth(date.getMonth() - 1); // last month
+      expect(CreditCard.isExpired(date.getMonth() + 1, date.getFullYear())).to.equal(true);
+      done();
+    });
+
+    it('returns false when card expires this month', function(done) {
+      var date = new Date();
+
+      expect(CreditCard.isExpired(date.getMonth() + 1, date.getFullYear())).to.equal(false);
+      done();
+    });
   });
 
 
