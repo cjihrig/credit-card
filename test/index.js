@@ -1,9 +1,10 @@
 var Lab = require('lab');
 var CreditCard = require('../');
 
+var lab = exports.lab = Lab.script();
 var expect = Lab.expect;
-var describe = Lab.experiment;
-var it = Lab.test;
+var describe = lab.describe;
+var it = lab.it;
 
 
 // a list of test credit cards is available at:
@@ -11,7 +12,7 @@ var it = Lab.test;
 
 
 describe('CreditCard', function() {
-  Lab.beforeEach(function(done) {
+  lab.beforeEach(function(done) {
     CreditCard.reset();
     done();
   });
