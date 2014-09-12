@@ -1,5 +1,8 @@
 # credit-card
 
+[![Current Version](https://img.shields.io/npm/v/credit-card.svg)](https://www.npmjs.org/package/credit-card)
+[![Build Status via Travis CI](https://travis-ci.org/cjihrig/credit-card.svg?branch=master)](https://travis-ci.org/cjihrig/credit-card)
+
 Module for performing credit card validation.
 
 ## Basic Usage
