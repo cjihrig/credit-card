@@ -1,8 +1,9 @@
+var Code = require('code');
 var Lab = require('lab');
 var CreditCard = require('../');
 
 var lab = exports.lab = Lab.script();
-var expect = Lab.expect;
+var expect = Code.expect;
 var describe = lab.describe;
 var it = lab.it;
 
@@ -35,7 +36,7 @@ describe('CreditCard', function() {
       expect(validation.validExpiryYear).to.equal(true);
       expect(validation.validCvv).to.equal(true);
       expect(validation.isExpired).to.equal(false);
-      expect(validation.customValidation).to.not.exist;
+      expect(validation.customValidation).to.not.exist();
       done();
     });
 
@@ -64,7 +65,7 @@ describe('CreditCard', function() {
       expect(validation.validExpiryYear).to.equal(true);
       expect(validation.validCvv).to.equal(true);
       expect(validation.isExpired).to.equal(false);
-      expect(validation.customValidation).to.not.exist;
+      expect(validation.customValidation).to.not.exist();
       done();
     });
 
@@ -84,7 +85,7 @@ describe('CreditCard', function() {
       expect(validation.validExpiryYear).to.equal(true);
       expect(validation.validCvv).to.equal(true);
       expect(validation.isExpired).to.equal(false);
-      expect(validation.customValidation).to.not.exist;
+      expect(validation.customValidation).to.not.exist();
       done();
     });
 
@@ -104,7 +105,7 @@ describe('CreditCard', function() {
       expect(validation.validExpiryYear).to.equal(true);
       expect(validation.validCvv).to.equal(true);
       expect(validation.isExpired).to.equal(false);
-      expect(validation.customValidation).to.not.exist;
+      expect(validation.customValidation).to.not.exist();
       done();
     });
 
@@ -117,7 +118,7 @@ describe('CreditCard', function() {
       expect(validation.validExpiryYear).to.equal(false);
       expect(validation.validCvv).to.equal(false);
       expect(validation.isExpired).to.equal(true);
-      expect(validation.customValidation).to.not.exist;
+      expect(validation.customValidation).to.not.exist();
       done();
     });
 
@@ -185,7 +186,7 @@ describe('CreditCard', function() {
       expect(validation1.validExpiryYear).to.equal(true);
       expect(validation1.validCvv).to.equal(true);
       expect(validation1.isExpired).to.equal(false);
-      expect(validation1.customValidation).to.not.exist;
+      expect(validation1.customValidation).to.not.exist();
 
       // verify that custom type validation works
       expect(validation2.card).to.deep.equal(card2);
@@ -472,7 +473,7 @@ describe('CreditCard', function() {
         }
       });
 
-      expect(original.cardTypes.foo).to.not.exist;
+      expect(original.cardTypes.foo).to.not.exist();
       expect(updated.cardTypes.foo).to.deep.equal({ bar: 'baz' });
       done();
     });
@@ -536,7 +537,7 @@ describe('CreditCard', function() {
       expect(validation.validExpiryYear).to.equal(true);
       expect(validation.validCvv).to.equal(true);
       expect(validation.isExpired).to.equal(false);
-      expect(validation.customValidation).to.not.exist;
+      expect(validation.customValidation).to.not.exist();
       done();
     });
   });
@@ -550,9 +551,9 @@ describe('CreditCard', function() {
 
       expect(updated).to.deep.equal({});
       expect(original).to.deep.equal(reset);
-      expect(reset.cardTypes).to.exist;
-      expect(reset.expiryMonths).to.exist;
-      expect(reset.expiryYears).to.exist;
+      expect(reset.cardTypes).to.exist();
+      expect(reset.expiryMonths).to.exist();
+      expect(reset.expiryYears).to.exist();
       done();
     });
   });
