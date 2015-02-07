@@ -267,7 +267,7 @@ describe('CreditCard', function() {
       expect(CreditCard.doesNumberMatchType('911', 'foo', {
         foo: {
           cardPattern: /^91*$/,
-          cvvPattern: /.*/,
+          cvvPattern: /.*/
         }
       })).to.equal(true);
       done();

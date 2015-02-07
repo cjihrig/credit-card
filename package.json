@@ -18,7 +18,7 @@
     "code": "1.x.x"
   },
   "scripts": {
-    "test": "node node_modules/.bin/lab -t 100 -v"
+    "test": "node node_modules/.bin/lab -v -t 100 -a code"
   },
   "keywords": [
     "credit card"
