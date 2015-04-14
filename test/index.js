@@ -202,6 +202,52 @@ describe('CreditCard', function() {
   });
 
 
+  describe('#determineCardType()', function() {
+    it('successfully detects full numbers', function(done) {
+      expect(CreditCard.determineCardType('378282246310005')).to.equal('AMERICANEXPRESS');
+      expect(CreditCard.determineCardType('371449635398431')).to.equal('AMERICANEXPRESS');
+      expect(CreditCard.determineCardType('378734493671000')).to.equal('AMERICANEXPRESS');
+      expect(CreditCard.determineCardType('30569309025904')).to.equal('DINERSCLUB');
+      expect(CreditCard.determineCardType('38520000023237')).to.equal('DINERSCLUB');
+      expect(CreditCard.determineCardType('6011111111111117')).to.equal('DISCOVER');
+      expect(CreditCard.determineCardType('6011000990139424')).to.equal('DISCOVER');
+      expect(CreditCard.determineCardType('3530111333300000')).to.equal('JCB');
+      expect(CreditCard.determineCardType('3566002020360505')).to.equal('JCB');
+      expect(CreditCard.determineCardType('5555555555554444')).to.equal('MASTERCARD');
+      expect(CreditCard.determineCardType('5105105105105100')).to.equal('MASTERCARD');
+      expect(CreditCard.determineCardType('4111111111111111')).to.equal('VISA');
+      expect(CreditCard.determineCardType('4012888888881881')).to.equal('VISA');
+      expect(CreditCard.determineCardType('4222222222222')).to.equal('VISA');
+      expect(CreditCard.determineCardType('0000000000000000')).to.equal(null);
+      done();
+    });
+
+    it('successfully detects partial numbers if allowPartial is true', function(done) {
+      expect(CreditCard.determineCardType('37', {allowPartial: true})).to.equal('AMERICANEXPRESS');
+      expect(CreditCard.determineCardType('34', {allowPartial: true})).to.equal('AMERICANEXPRESS');
+      expect(CreditCard.determineCardType('3787344', {allowPartial: true})).to.equal('AMERICANEXPRESS');
+      expect(CreditCard.determineCardType('305', {allowPartial: true})).to.equal('DINERSCLUB');
+      expect(CreditCard.determineCardType('38', {allowPartial: true})).to.equal('DINERSCLUB');
+      expect(CreditCard.determineCardType('6011', {allowPartial: true})).to.equal('DISCOVER');
+      expect(CreditCard.determineCardType('601100099013', {allowPartial: true})).to.equal('DISCOVER');
+      expect(CreditCard.determineCardType('35', {allowPartial: true})).to.equal('JCB');
+      expect(CreditCard.determineCardType('3566002020360505', {allowPartial: true})).to.equal('JCB');
+      expect(CreditCard.determineCardType('5555555', {allowPartial: true})).to.equal('MASTERCARD');
+      expect(CreditCard.determineCardType('51', {allowPartial: true})).to.equal('MASTERCARD');
+      expect(CreditCard.determineCardType('411', {allowPartial: true})).to.equal('VISA');
+      expect(CreditCard.determineCardType('4', {allowPartial: true})).to.equal('VISA');
+      expect(CreditCard.determineCardType('42222222222', {allowPartial: true})).to.equal('VISA');
+      done();
+    });
+
+    it('does not allow partial matches if allowPartial is false', function(done) {
+      expect(CreditCard.determineCardType('5555555')).to.equal(null);
+      expect(CreditCard.determineCardType('4', {allowPartial: false})).to.equal(null);
+      done();
+    });
+  });
+
+
   describe('#isValidCardNumber()', function() {
     it('returns true for valid cards', function(done) {
       expect(CreditCard.isValidCardNumber('378282246310005', 'AMERICANEXPRESS')).to.equal(true);
