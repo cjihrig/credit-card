@@ -68,7 +68,18 @@ The `validation` object returned by `validate()` will look like this:
         - `isExpired` (boolean) - The result of calling `isExpired()`.
         - `customValidation` (any) - The result of custom validation. Can be any data type.
 
-Performs several validation checks on credit card data. 
+Performs several validation checks on credit card data.
+
+### `determineCardType(number [, options])`
+
+  - Arguments
+    - `number` (string) - Credit card number string. This value is passed to `sanitizeNumberString()` prior to classification.
+    - `options` (object) - An optional object used to pass in additional options. The following options are supported.
+        - `allowPartial` (boolean) - If `true`, then partial matches are accepted. Otherwise, only full length credit card numbers are accepted. Defaults to `false`.
+  - Returns
+    - string - a string representing the card type. If no type matches the `number`, then `null` is returned.
+
+Given a credit card number, this function attempts to determine the card type.
 
 ### `isValidCardNumber(number, type [, options])`
 
@@ -179,7 +190,7 @@ This module supports a variety of credit cards. To better accommodate a wider ra
 
 ## Defining Custom Card Types
 
-The following example defines and validates a new card type known as `GIFT_CARD`. Notice that the `card` variable has its `cardType` set to `GIFT_CARD`, and a new `pin` field has been defined. The `options` variable is passed as the second argument to `validate()`. These options define the new `GIFT_CARD` type. The `cardPattern` is a regular expression that all gift card numbers should match. Similarly, `cvvPattern` is a regular expression that the CVV should match.
+The following example defines and validates a new card type known as `GIFT_CARD`. Notice that the `card` variable has its `cardType` set to `GIFT_CARD`, and a new `pin` field has been defined. The `options` variable is passed as the second argument to `validate()`. These options define the new `GIFT_CARD` type. The `cardPattern` is a regular expression that all complete gift card numbers should match. `partialPattern` is the minimal regular expression that can be used to detect a gift card. `cvvPattern` is a regular expression that the complete CVV should match.
 
 Also notice the `customValidation` function. This function is used when normal validation is not quite enough. This function is passed the `card` object and `settings` object used by `validate()`. This function can return any data, which will be added directly to the response.
 
@@ -198,6 +209,7 @@ var options = {
   cardTypes: {
     GIFT_CARD: {
       cardPattern: /^4[0-9]{12}(?:[0-9]{3})?$/,
+      partialPattern: /^4/,
       cvvPattern: /.*/
     }
   },
