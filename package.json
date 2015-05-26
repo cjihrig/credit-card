@@ -2,7 +2,7 @@
   "name": "credit-card",
   "version": "1.2.1",
   "description": "credit card validation",
-  "main": "index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/continuationlabs/credit-card"
