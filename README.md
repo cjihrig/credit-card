@@ -97,6 +97,8 @@ Determines if a credit card number is valid for a given credit card type. Also v
   - Arguments
     - `month` (number or string) - Month value to be evaluated.
     - `options` (object) - An optional object used to define the minimum and maximum month values accepted.
+  - Returns
+    - boolean - `true` if `month` is a valid expiry month, `false` otherwise.
 
 Determines if a value is a valid credit card expiry month. The month must fall between the defined minimum and maximum months. This range is 1 to 12 by default, but can be adjusted using the `options` input.
 
@@ -105,6 +107,8 @@ Determines if a value is a valid credit card expiry month. The month must fall b
   - Arguments
     - `year` (number or string) - Year value to be evaluated.
     - `options` (object) - An optional object used to define the minimum and maximum year values accepted.
+  - Returns
+    - boolean - `true` if `year` is a valid expiry month, `false` otherwise.
 
 Determines if a value is a valid credit card expiry year. The year must fall between the defined minimum and maximum years. This range is 1900 to 2200 by default, but can be adjusted using the `options` input.
 

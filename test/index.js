@@ -7,20 +7,17 @@ var expect = Code.expect;
 var describe = lab.describe;
 var it = lab.it;
 
-
 // a list of test credit cards is available at:
 // http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
 
-
-describe('CreditCard', function() {
-  lab.beforeEach(function(done) {
+describe('CreditCard', function () {
+  lab.beforeEach(function (done) {
     CreditCard.reset();
     done();
   });
 
-
-  describe('#validate()', function() {
-    it('no invalid responses on valid card', function(done) {
+  describe('#validate()', function () {
+    it('no invalid responses on valid card', function (done) {
       var card = {
         cardType: 'VISA',
         number: '4111111111111111',
@@ -40,7 +37,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('validates a card using a custom schema', function(done) {
+    it('validates a card using a custom schema', function (done) {
       var schema = {
         cardType: 'type',
         number: 'number',
@@ -69,7 +66,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('no invalid responses on valid card by alias', function(done) {
+    it('no invalid responses on valid card by alias', function (done) {
       var card = {
         cardType: 'VC',
         number: '4111111111111111',
@@ -89,7 +86,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('invalid responses on invalid card', function(done) {
+    it('invalid responses on invalid card', function (done) {
       var card = {
         cardType: 'VISA',
         number: '4111111111111112',
@@ -109,7 +106,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('invalid responses on no card', function(done) {
+    it('invalid responses on no card', function (done) {
       var validation = CreditCard.validate();
 
       expect(validation.card).to.deep.equal({});
@@ -122,7 +119,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('provides custom validation function', function(done) {
+    it('provides custom validation function', function (done) {
       var card = {
         cardType: 'VISA',
         number: '4111111111111111',
@@ -132,7 +129,7 @@ describe('CreditCard', function() {
         pin: '7890'
       };
       var options = {
-        customValidation: function(card, settings) {
+        customValidation: function (card, settings) {
           return card.pin === '7890';
         }
       };
@@ -148,7 +145,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('defines a new card type', function(done) {
+    it('defines a new card type', function (done) {
       var card1 = {
         cardType: 'VISA',
         number: '4111111111111111',
@@ -170,7 +167,7 @@ describe('CreditCard', function() {
             cvvPattern: /.*/
           }
         },
-        customValidation: function(card, settings) {
+        customValidation: function (card, settings) {
           if (card.cardType === 'GIFT_CARD') {
             return card.pin === '7890';
           }
@@ -201,9 +198,8 @@ describe('CreditCard', function() {
     });
   });
 
-
-  describe('#determineCardType()', function() {
-    it('successfully detects full numbers', function(done) {
+  describe('#determineCardType()', function () {
+    it('successfully detects full numbers', function (done) {
       expect(CreditCard.determineCardType('378282246310005')).to.equal('AMERICANEXPRESS');
       expect(CreditCard.determineCardType('371449635398431')).to.equal('AMERICANEXPRESS');
       expect(CreditCard.determineCardType('378734493671000')).to.equal('AMERICANEXPRESS');
@@ -222,7 +218,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('successfully detects partial numbers if allowPartial is true', function(done) {
+    it('successfully detects partial numbers if allowPartial is true', function (done) {
       expect(CreditCard.determineCardType('37', {allowPartial: true})).to.equal('AMERICANEXPRESS');
       expect(CreditCard.determineCardType('34', {allowPartial: true})).to.equal('AMERICANEXPRESS');
       expect(CreditCard.determineCardType('3787344', {allowPartial: true})).to.equal('AMERICANEXPRESS');
@@ -240,16 +236,15 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('does not allow partial matches if allowPartial is false', function(done) {
+    it('does not allow partial matches if allowPartial is false', function (done) {
       expect(CreditCard.determineCardType('5555555')).to.equal(null);
       expect(CreditCard.determineCardType('4', {allowPartial: false})).to.equal(null);
       done();
     });
   });
 
-
-  describe('#isValidCardNumber()', function() {
-    it('returns true for valid cards', function(done) {
+  describe('#isValidCardNumber()', function () {
+    it('returns true for valid cards', function (done) {
       expect(CreditCard.isValidCardNumber('378282246310005', 'AMERICANEXPRESS')).to.equal(true);
       expect(CreditCard.isValidCardNumber('371449635398431', 'AMERICANEXPRESS')).to.equal(true);
       expect(CreditCard.isValidCardNumber('378734493671000', 'AMERICANEXPRESS')).to.equal(true);
@@ -267,15 +262,14 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('returns false for numbers that pass luhn but fail are invalid', function(done) {
+    it('returns false for numbers that pass luhn but fail are invalid', function (done) {
       expect(CreditCard.isValidCardNumber('123', 'AMERICANEXPRESS')).to.equal(false);
       done();
     });
   });
 
-
-  describe('#doesNumberMatchType()', function() {
-    it('returns true for valid card matches', function(done) {
+  describe('#doesNumberMatchType()', function () {
+    it('returns true for valid card matches', function (done) {
       expect(CreditCard.doesNumberMatchType('378282246310005', 'AMERICANEXPRESS')).to.equal(true);
       expect(CreditCard.doesNumberMatchType('371449635398431', 'AMERICANEXPRESS')).to.equal(true);
       expect(CreditCard.doesNumberMatchType('378734493671000', 'AMERICANEXPRESS')).to.equal(true);
@@ -293,7 +287,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('returns false for invalid cards', function(done) {
+    it('returns false for invalid cards', function (done) {
       expect(CreditCard.doesNumberMatchType('4111111111111111', 'AMERICANEXPRESS')).to.equal(false);
       expect(CreditCard.doesNumberMatchType('5555555555554444', 'DINERSCLUB')).to.equal(false);
       expect(CreditCard.doesNumberMatchType('3530111333300000', 'DISCOVER')).to.equal(false);
@@ -303,13 +297,13 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('returns false for unknown card types', function(done) {
+    it('returns false for unknown card types', function (done) {
       expect(CreditCard.doesNumberMatchType('4111111111111111', '')).to.equal(false);
       expect(CreditCard.doesNumberMatchType('378282246310005', 'foo')).to.equal(false);
       done();
     });
 
-    it('returns true for custom card types', function(done) {
+    it('returns true for custom card types', function (done) {
       expect(CreditCard.doesNumberMatchType('911', 'foo', {
         foo: {
           cardPattern: /^91*$/,
@@ -320,9 +314,8 @@ describe('CreditCard', function() {
     });
   });
 
-
-  describe('#doesCvvMatchType()', function() {
-    it('returns true for valid cvv matches', function(done) {
+  describe('#doesCvvMatchType()', function () {
+    it('returns true for valid cvv matches', function (done) {
       expect(CreditCard.doesCvvMatchType('1234', 'AMERICANEXPRESS')).to.equal(true);
       expect(CreditCard.doesCvvMatchType('123', 'DINERSCLUB')).to.equal(true);
       expect(CreditCard.doesCvvMatchType('456', 'DISCOVER')).to.equal(true);
@@ -332,7 +325,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('returns false for invalid cvvs', function(done) {
+    it('returns false for invalid cvvs', function (done) {
       expect(CreditCard.doesCvvMatchType('123', 'AMERICANEXPRESS')).to.equal(false);
       expect(CreditCard.doesCvvMatchType('1234', 'DINERSCLUB')).to.equal(false);
       expect(CreditCard.doesCvvMatchType('1', 'DISCOVER')).to.equal(false);
@@ -342,13 +335,13 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('returns false for unknown card types', function(done) {
+    it('returns false for unknown card types', function (done) {
       expect(CreditCard.doesCvvMatchType('999', '')).to.equal(false);
       expect(CreditCard.doesCvvMatchType('x', 'foo')).to.equal(false);
       done();
     });
 
-    it('returns true for custom card types', function(done) {
+    it('returns true for custom card types', function (done) {
       expect(CreditCard.doesCvvMatchType('abc', 'foo', {
         foo: {
           cardPattern: /.*/,
@@ -359,9 +352,8 @@ describe('CreditCard', function() {
     });
   });
 
-
-  describe('#isValidExpiryMonth()', function() {
-    it('returns true for valid month', function(done) {
+  describe('#isValidExpiryMonth()', function () {
+    it('returns true for valid month', function (done) {
       expect(CreditCard.isValidExpiryMonth('01')).to.equal(true);
       expect(CreditCard.isValidExpiryMonth('02')).to.equal(true);
       expect(CreditCard.isValidExpiryMonth('3')).to.equal(true);
@@ -377,14 +369,14 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('returns false for invalid month', function(done) {
+    it('returns false for invalid month', function (done) {
       expect(CreditCard.isValidExpiryMonth('001')).to.equal(false);
       expect(CreditCard.isValidExpiryMonth(0)).to.equal(false);
       expect(CreditCard.isValidExpiryMonth(13)).to.equal(false);
       done();
     });
 
-    it('returns true for month in specified range', function(done) {
+    it('returns true for month in specified range', function (done) {
       var valid = CreditCard.isValidExpiryMonth(13, {
         min: 13,
         max: 13
@@ -395,9 +387,8 @@ describe('CreditCard', function() {
     });
   });
 
-
-  describe('#isValidExpiryYear()', function() {
-    it('returns true for valid year', function(done) {
+  describe('#isValidExpiryYear()', function () {
+    it('returns true for valid year', function (done) {
       expect(CreditCard.isValidExpiryYear('2014')).to.equal(true);
       expect(CreditCard.isValidExpiryYear(1990)).to.equal(true);
       expect(CreditCard.isValidExpiryYear(1991)).to.equal(true);
@@ -406,14 +397,14 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('returns false for invalid year', function(done) {
+    it('returns false for invalid year', function (done) {
       expect(CreditCard.isValidExpiryYear('100')).to.equal(false);
       expect(CreditCard.isValidExpiryYear(1899)).to.equal(false);
       expect(CreditCard.isValidExpiryYear(2201)).to.equal(false);
       done();
     });
 
-    it('returns true for year in specified range', function(done) {
+    it('returns true for year in specified range', function (done) {
       var valid = CreditCard.isValidExpiryYear(1800, {
         min: 1800,
         max: 1800
@@ -424,19 +415,18 @@ describe('CreditCard', function() {
     });
   });
 
-
-  describe('#isExpired()', function() {
-    it('returns true for an expired card', function(done) {
+  describe('#isExpired()', function () {
+    it('returns true for an expired card', function (done) {
       expect(CreditCard.isExpired(12, 2013)).to.equal(true);
       done();
     });
 
-    it('returns false for non-expired card', function(done) {
+    it('returns false for non-expired card', function (done) {
       expect(CreditCard.isExpired(1, 2100)).to.equal(false);
       done();
     });
 
-    it('returns true when card expired last month', function(done) {
+    it('returns true when card expired last month', function (done) {
       var date = new Date();
 
       date.setMonth(date.getMonth() - 1); // last month
@@ -444,7 +434,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('returns false when card expires this month', function(done) {
+    it('returns false when card expires this month', function (done) {
       var date = new Date();
 
       expect(CreditCard.isExpired(date.getMonth() + 1, date.getFullYear())).to.equal(false);
@@ -452,9 +442,8 @@ describe('CreditCard', function() {
     });
   });
 
-
-  describe('#luhn()', function() {
-    it('returns true for valid cards', function(done) {
+  describe('#luhn()', function () {
+    it('returns true for valid cards', function (done) {
       expect(CreditCard.luhn('378282246310005')).to.equal(true);
       expect(CreditCard.luhn('371449635398431')).to.equal(true);
       expect(CreditCard.luhn('378734493671000')).to.equal(true);
@@ -475,7 +464,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('returns false for invalid cards', function(done) {
+    it('returns false for invalid cards', function (done) {
       expect(CreditCard.luhn('5105105105105101')).to.equal(false);
       expect(CreditCard.luhn('4111111111111112')).to.equal(false);
       expect(CreditCard.luhn('')).to.equal(false);
@@ -487,16 +476,15 @@ describe('CreditCard', function() {
     });
   });
 
-
-  describe('#sanitizeNumberString()', function() {
-    it('returns a string stripped of all non-numeric characters', function(done) {
+  describe('#sanitizeNumberString()', function () {
+    it('returns a string stripped of all non-numeric characters', function (done) {
       var str = CreditCard.sanitizeNumberString('4111-1111-1111-1111');
 
       expect(str).to.equal('4111111111111111');
       done();
     });
 
-    it('returns empty string for non-string input', function(done) {
+    it('returns empty string for non-string input', function (done) {
       expect(CreditCard.sanitizeNumberString()).to.equal('');
       expect(CreditCard.sanitizeNumberString(undefined)).to.equal('');
       expect(CreditCard.sanitizeNumberString(null)).to.equal('');
@@ -507,9 +495,8 @@ describe('CreditCard', function() {
     });
   });
 
-
-  describe('#defaults()', function() {
-    it('adds to defaults', function(done) {
+  describe('#defaults()', function () {
+    it('adds to defaults', function (done) {
       var original = CreditCard.reset();
       var updated = CreditCard.defaults({
         cardTypes: {
@@ -524,7 +511,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('makes no changes without arguments', function(done) {
+    it('makes no changes without arguments', function (done) {
       var original = CreditCard.reset();
       var updated = CreditCard.defaults();
 
@@ -532,7 +519,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('does not overwrite by default', function(done) {
+    it('does not overwrite by default', function (done) {
       var original = CreditCard.reset();
       var updated = CreditCard.defaults({});
 
@@ -540,14 +527,14 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('overwrites when second argument is true', function(done) {
+    it('overwrites when second argument is true', function (done) {
       var updated = CreditCard.defaults({}, true);
 
       expect(updated).to.deep.equal({});
       done();
     });
 
-    it('does not overwrite when second argument is false', function(done) {
+    it('does not overwrite when second argument is false', function (done) {
       var original = CreditCard.reset();
       var updated = CreditCard.defaults({}, false);
 
@@ -555,7 +542,7 @@ describe('CreditCard', function() {
       done();
     });
 
-    it('sets a custom schema', function(done) {
+    it('sets a custom schema', function (done) {
       var schema = {
         cardType: 'type',
         number: 'number',
@@ -588,9 +575,8 @@ describe('CreditCard', function() {
     });
   });
 
-
-  describe('#reset()', function() {
-    it('resets to original defaults', function(done) {
+  describe('#reset()', function () {
+    it('resets to original defaults', function (done) {
       var original = CreditCard.reset();
       var updated = CreditCard.defaults({}, true);
       var reset = CreditCard.reset();
