@@ -5,6 +5,8 @@
 ![Dependencies](http://img.shields.io/david/continuationlabs/credit-card.svg)
 ![devDependencies](http://img.shields.io/david/dev/continuationlabs/credit-card.svg)
 
+[![belly-button-style](https://cdn.rawgit.com/continuationlabs/belly-button/master/badge.svg)](https://github.com/continuationlabs/belly-button)
+
 Module for performing credit card validation.
 
 ## Basic Usage
