@@ -1,6 +1,6 @@
 {
   "name": "credit-card",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "credit card validation",
   "main": "lib/index.js",
   "author": "Continuation Labs <contact@continuation.io> (http://continuation.io/)",
@@ -9,7 +9,7 @@
     "url": "https://github.com/continuationlabs/credit-card"
   },
   "scripts": {
-    "test": "semistandard && lab -v -t 100 -a code"
+    "test": "belly-button && lab -v -t 100 -a code"
   },
   "keywords": [
     "credit card"
@@ -21,9 +21,9 @@
     "hoek": "2.x.x"
   },
   "devDependencies": {
+    "belly-button": "1.x.x",
     "code": "1.x.x",
-    "lab": "5.x.x",
-    "semistandard": "7.x.x"
+    "lab": "6.x.x"
   },
   "directories": {
     "test": "test"
