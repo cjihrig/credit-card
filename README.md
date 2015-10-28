@@ -3,7 +3,6 @@
 [![Current Version](https://img.shields.io/npm/v/credit-card.svg)](https://www.npmjs.org/package/credit-card)
 [![Build Status via Travis CI](https://travis-ci.org/continuationlabs/credit-card.svg?branch=master)](https://travis-ci.org/continuationlabs/credit-card)
 ![Dependencies](http://img.shields.io/david/continuationlabs/credit-card.svg)
-![devDependencies](http://img.shields.io/david/dev/continuationlabs/credit-card.svg)
 
 [![belly-button-style](https://cdn.rawgit.com/continuationlabs/belly-button/master/badge.svg)](https://github.com/continuationlabs/belly-button)
 
