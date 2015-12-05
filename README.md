@@ -277,4 +277,4 @@ validation = CreditCard.validate(card);
 
 ## Test Card Numbers
 
-A list of test credit cards is available from [http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm](PayPal).
+A list of test credit cards is available from [PayPal](http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm).
