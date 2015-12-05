@@ -20,7 +20,7 @@
     "node": ">=4.0.0"
   },
   "dependencies": {
-    "hoek": "2.x.x"
+    "reach": "1.x.x"
   },
   "devDependencies": {
     "belly-button": "1.x.x",
