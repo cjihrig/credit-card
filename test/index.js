@@ -208,6 +208,8 @@ describe('CreditCard', () => {
       expect(CreditCard.determineCardType('3566002020360505')).to.equal('JCB');
       expect(CreditCard.determineCardType('5555555555554444')).to.equal('MASTERCARD');
       expect(CreditCard.determineCardType('5105105105105100')).to.equal('MASTERCARD');
+      expect(CreditCard.determineCardType('2221222122212227')).to.equal('MASTERCARD');
+      expect(CreditCard.determineCardType('2720272027202720')).to.equal('MASTERCARD');
       expect(CreditCard.determineCardType('4111111111111111')).to.equal('VISA');
       expect(CreditCard.determineCardType('4012888888881881')).to.equal('VISA');
       expect(CreditCard.determineCardType('4222222222222')).to.equal('VISA');
@@ -227,6 +229,8 @@ describe('CreditCard', () => {
       expect(CreditCard.determineCardType('3566002020360505', {allowPartial: true})).to.equal('JCB');
       expect(CreditCard.determineCardType('5555555', {allowPartial: true})).to.equal('MASTERCARD');
       expect(CreditCard.determineCardType('51', {allowPartial: true})).to.equal('MASTERCARD');
+      expect(CreditCard.determineCardType('2221', {allowPartial: true})).to.equal('MASTERCARD');
+      expect(CreditCard.determineCardType('2720', {allowPartial: true})).to.equal('MASTERCARD');
       expect(CreditCard.determineCardType('411', {allowPartial: true})).to.equal('VISA');
       expect(CreditCard.determineCardType('4', {allowPartial: true})).to.equal('VISA');
       expect(CreditCard.determineCardType('42222222222', {allowPartial: true})).to.equal('VISA');
@@ -253,6 +257,8 @@ describe('CreditCard', () => {
       expect(CreditCard.isValidCardNumber('3566002020360505', 'JCB')).to.equal(true);
       expect(CreditCard.isValidCardNumber('5555555555554444', 'MASTERCARD')).to.equal(true);
       expect(CreditCard.isValidCardNumber('5105105105105100', 'MASTERCARD')).to.equal(true);
+      expect(CreditCard.isValidCardNumber('2221222122212227', 'MASTERCARD')).to.equal(true);
+      expect(CreditCard.isValidCardNumber('2720272027202720', 'MASTERCARD')).to.equal(true);
       expect(CreditCard.isValidCardNumber('4111111111111111', 'VISA')).to.equal(true);
       expect(CreditCard.isValidCardNumber('4012888888881881', 'VISA')).to.equal(true);
       expect(CreditCard.isValidCardNumber('4222222222222', 'VISA')).to.equal(true);
@@ -278,6 +284,8 @@ describe('CreditCard', () => {
       expect(CreditCard.doesNumberMatchType('3566002020360505', 'JCB')).to.equal(true);
       expect(CreditCard.doesNumberMatchType('5555555555554444', 'MASTERCARD')).to.equal(true);
       expect(CreditCard.doesNumberMatchType('5105105105105100', 'MASTERCARD')).to.equal(true);
+      expect(CreditCard.doesNumberMatchType('2221222122212227', 'MASTERCARD')).to.equal(true);
+      expect(CreditCard.doesNumberMatchType('2720272027202720', 'MASTERCARD')).to.equal(true);
       expect(CreditCard.doesNumberMatchType('4111111111111111', 'VISA')).to.equal(true);
       expect(CreditCard.doesNumberMatchType('4012888888881881', 'VISA')).to.equal(true);
       expect(CreditCard.doesNumberMatchType('4222222222222', 'VISA')).to.equal(true);
@@ -290,6 +298,7 @@ describe('CreditCard', () => {
       expect(CreditCard.doesNumberMatchType('3530111333300000', 'DISCOVER')).to.equal(false);
       expect(CreditCard.doesNumberMatchType('6011111111111117', 'JCB')).to.equal(false);
       expect(CreditCard.doesNumberMatchType('30569309025904', 'MASTERCARD')).to.equal(false);
+      expect(CreditCard.doesNumberMatchType('2220222022202220', 'MASTERCARD')).to.equal(false);
       expect(CreditCard.doesNumberMatchType('378282246310005', 'VISA')).to.equal(false);
       done();
     });
