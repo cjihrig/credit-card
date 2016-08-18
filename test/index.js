@@ -26,7 +26,7 @@ describe('CreditCard', () => {
       };
       const validation = CreditCard.validate(card);
 
-      expect(validation.card).to.deep.equal(card);
+      expect(validation.card).to.equal(card);
       expect(validation.validCardNumber).to.equal(true);
       expect(validation.validExpiryMonth).to.equal(true);
       expect(validation.validExpiryYear).to.equal(true);
@@ -53,7 +53,7 @@ describe('CreditCard', () => {
       };
       const validation = CreditCard.validate(card, { schema });
 
-      expect(validation.card).to.deep.equal(card);
+      expect(validation.card).to.equal(card);
       expect(validation.validCardNumber).to.equal(true);
       expect(validation.validExpiryMonth).to.equal(true);
       expect(validation.validExpiryYear).to.equal(true);
@@ -73,7 +73,7 @@ describe('CreditCard', () => {
       };
       const validation = CreditCard.validate(card);
 
-      expect(validation.card).to.deep.equal(card);
+      expect(validation.card).to.equal(card);
       expect(validation.validCardNumber).to.equal(true);
       expect(validation.validExpiryMonth).to.equal(true);
       expect(validation.validExpiryYear).to.equal(true);
@@ -93,7 +93,7 @@ describe('CreditCard', () => {
       };
       const validation = CreditCard.validate(card);
 
-      expect(validation.card).to.deep.equal(card);
+      expect(validation.card).to.equal(card);
       expect(validation.validCardNumber).to.equal(false);
       expect(validation.validExpiryMonth).to.equal(false);
       expect(validation.validExpiryYear).to.equal(true);
@@ -106,7 +106,7 @@ describe('CreditCard', () => {
     it('invalid responses on no card', (done) => {
       const validation = CreditCard.validate();
 
-      expect(validation.card).to.deep.equal({});
+      expect(validation.card).to.equal({});
       expect(validation.validCardNumber).to.equal(false);
       expect(validation.validExpiryMonth).to.equal(false);
       expect(validation.validExpiryYear).to.equal(false);
@@ -132,7 +132,7 @@ describe('CreditCard', () => {
       };
       const validation = CreditCard.validate(card, options);
 
-      expect(validation.card).to.deep.equal(card);
+      expect(validation.card).to.equal(card);
       expect(validation.validCardNumber).to.equal(true);
       expect(validation.validExpiryMonth).to.equal(true);
       expect(validation.validExpiryYear).to.equal(true);
@@ -174,7 +174,7 @@ describe('CreditCard', () => {
       const validation2 = CreditCard.validate(card2, options);
 
       // Verify that existing validation still works
-      expect(validation1.card).to.deep.equal(card1);
+      expect(validation1.card).to.equal(card1);
       expect(validation1.validCardNumber).to.equal(true);
       expect(validation1.validExpiryMonth).to.equal(true);
       expect(validation1.validExpiryYear).to.equal(true);
@@ -183,7 +183,7 @@ describe('CreditCard', () => {
       expect(validation1.customValidation).to.not.exist();
 
       // Verify that custom type validation works
-      expect(validation2.card).to.deep.equal(card2);
+      expect(validation2.card).to.equal(card2);
       expect(validation2.validCardNumber).to.equal(true);
       expect(validation2.validExpiryMonth).to.equal(true);
       expect(validation2.validExpiryYear).to.equal(true);
@@ -504,7 +504,7 @@ describe('CreditCard', () => {
       });
 
       expect(original.cardTypes.foo).to.not.exist();
-      expect(updated.cardTypes.foo).to.deep.equal({ bar: 'baz' });
+      expect(updated.cardTypes.foo).to.equal({ bar: 'baz' });
       done();
     });
 
@@ -512,7 +512,7 @@ describe('CreditCard', () => {
       const original = CreditCard.reset();
       const updated = CreditCard.defaults();
 
-      expect(original).to.deep.equal(updated);
+      expect(original).to.equal(updated);
       done();
     });
 
@@ -520,14 +520,14 @@ describe('CreditCard', () => {
       const original = CreditCard.reset();
       const updated = CreditCard.defaults({});
 
-      expect(original).to.deep.equal(updated);
+      expect(original).to.equal(updated);
       done();
     });
 
     it('overwrites when second argument is true', (done) => {
       const updated = CreditCard.defaults({}, true);
 
-      expect(updated).to.deep.equal({});
+      expect(updated).to.equal({});
       done();
     });
 
@@ -535,7 +535,7 @@ describe('CreditCard', () => {
       const original = CreditCard.reset();
       const updated = CreditCard.defaults({}, false);
 
-      expect(original).to.deep.equal(updated);
+      expect(original).to.equal(updated);
       done();
     });
 
@@ -558,7 +558,7 @@ describe('CreditCard', () => {
       CreditCard.defaults({ schema });
       const validation = CreditCard.validate(card);
 
-      expect(validation.card).to.deep.equal(card);
+      expect(validation.card).to.equal(card);
       expect(validation.validCardNumber).to.equal(true);
       expect(validation.validExpiryMonth).to.equal(true);
       expect(validation.validExpiryYear).to.equal(true);
@@ -575,8 +575,8 @@ describe('CreditCard', () => {
       const updated = CreditCard.defaults({}, true);
       const reset = CreditCard.reset();
 
-      expect(updated).to.deep.equal({});
-      expect(original).to.deep.equal(reset);
+      expect(updated).to.equal({});
+      expect(original).to.equal(reset);
       expect(reset.cardTypes).to.exist();
       expect(reset.expiryMonths).to.exist();
       expect(reset.expiryYears).to.exist();

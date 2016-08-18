@@ -14,18 +14,18 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "belly-button && lab -v -t 100 -a code"
+    "test": "belly-button -f && lab -v -t 100 -a code"
   },
   "engines": {
     "node": ">=4.0.0"
   },
   "dependencies": {
-    "reach": "1.x.x"
+    "reach": "1.0.0"
   },
   "devDependencies": {
-    "belly-button": "1.x.x",
-    "code": "2.x.x",
-    "lab": "8.x.x"
+    "belly-button": "3.x.x",
+    "code": "3.x.x",
+    "lab": "11.x.x"
   },
   "keywords": [
     "credit card"
