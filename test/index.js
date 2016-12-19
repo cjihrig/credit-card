@@ -514,6 +514,7 @@ describe('CreditCard', () => {
 
       expect(original.cardTypes.foo).to.not.exist();
       expect(updated.cardTypes.foo).to.equal({ bar: 'baz' });
+      expect(updated.cardTypes.VISA).to.equal(original.cardTypes.VISA);
       done();
     });
 
