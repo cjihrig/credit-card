@@ -1,6 +1,6 @@
 {
   "name": "credit-card",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "credit card validation",
   "author": "Continuation Labs <contact@continuation.io> (http://continuation.io/)",
   "main": "lib/index.js",
