@@ -2,30 +2,31 @@
   "name": "credit-card",
   "version": "3.0.1",
   "description": "credit card validation",
-  "author": "Continuation Labs <contact@continuation.io> (http://continuation.io/)",
+  "author": "Colin J. Ihrig <cjihrig@gmail.com> (http://www.cjihrig.com/)",
   "main": "lib/index.js",
-  "homepage": "https://github.com/continuationlabs/credit-card",
+  "homepage": "https://github.com/cjihrig/credit-card",
   "repository": {
     "type": "git",
-    "url": "https://github.com/continuationlabs/credit-card"
+    "url": "https://github.com/cjihrig/credit-card"
   },
   "bugs": {
-    "url": "https://github.com/continuationlabs/credit-card/issues"
+    "url": "https://github.com/cjihrig/credit-card/issues"
   },
   "license": "MIT",
   "scripts": {
     "test": "belly-button -f && lab -v -t 100"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "dependencies": {
     "lodash.merge": "4.6.x",
     "reach": "1.x.x"
   },
   "devDependencies": {
-    "belly-button": "4.x.x",
-    "lab": "14.x.x"
+    "belly-button": "5.x.x",
+    "code": "5.x.x",
+    "lab": "18.x.x"
   },
   "keywords": [
     "credit card"
