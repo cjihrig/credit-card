@@ -1,6 +1,6 @@
 {
   "name": "credit-card",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "credit card validation",
   "author": "Colin J. Ihrig <cjihrig@gmail.com> (http://www.cjihrig.com/)",
   "main": "lib/index.js",
